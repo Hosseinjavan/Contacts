@@ -59,7 +59,10 @@ public:
     {
         head = nullptr;
     }
-    ContactsList(const ContactsList& other);
+    ContactsList(const ContactsList& other)
+    {
+        head = other.head;
+    }
 
     // Destructor
     ~ContactsList();

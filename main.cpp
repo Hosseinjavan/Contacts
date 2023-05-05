@@ -167,9 +167,36 @@ public:
             }
             it = it->getNext();
         }
+        return nullptr;
     }
-    ContactNode* searchByEmail(const std::string& email);  // Returns the node with matching email
-    ContactNode* searchByPhone(const std::string& phone);  // Returns the node with matching phone
+
+    ContactNode* searchByEmail(const std::string& email)  // Returns the node with matching email
+    {
+        auto it = head;
+        while(it != nullptr)
+        {
+            if(it->getEmail() == email)
+            {
+                return it;
+            }
+            it = it->getNext();
+        }
+        return nullptr;
+    }
+
+    ContactNode* searchByPhone(const std::string& phone)  // Returns the node with matching phone
+    {
+        auto it = head;
+        while(it != nullptr)
+        {
+            if(it->getPhone() == phone)
+            {
+                return it;
+            }
+            it = it->getNext();
+        }
+        return nullptr;
+    }
 
     // Print methods
     void print()
@@ -197,7 +224,6 @@ int main()
     contactsList.addContact("mostafa", "@@", "0912");
     contactsList.addContact("esmaeel", "@$", "0871");
     contactsList.addContact("abol", "@$", "0871");
-    auto tmp = contactsList.searchByName("mostafa");
-    cout << tmp->getEmail() << endl;
-    cout << "here" << endl;
+    auto tmp = contactsList.searchByEmail("@@");
+    cout << tmp->getName() << endl;
 }

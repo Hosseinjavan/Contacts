@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+using namespace std;
 
 class ContactNode {
 private:
@@ -21,7 +22,7 @@ public:
     }
 
     void setName(const std::string &name) {
-        ContactNode::name = name;
+        this->name = name;
     }
 
     const std::string &getEmail() const {
@@ -29,7 +30,7 @@ public:
     }
 
     void setEmail(const std::string &email) {
-        ContactNode::email = email;
+        this->email = email;
     }
 
     const std::string &getPhone() const {
@@ -37,7 +38,7 @@ public:
     }
 
     void setPhone(const std::string &phone) {
-        ContactNode::phone = phone;
+        this->phone = phone;
     }
 
     ContactNode *getNext() const {
@@ -45,7 +46,7 @@ public:
     }
 
     void setNext(ContactNode *next) {
-        ContactNode::next = next;
+        this->next = next;
     }
 };
 
@@ -124,23 +125,73 @@ public:
 
     // Insertion method
     void addContact(const std::string& name, const std::string& email,
-                    const std::string& phone);
+                    const std::string& phone){
+        ContactNode *it = head;
+        if(head == nullptr)
+        {
+            head = new ContactNode(name, email, phone);
+            return;
+        }
+        while (it->getNext() != nullptr)
+        {
+            it = it->getNext();
+        }
+        it->setNext(new ContactNode(name, email, phone));
+    }
 
     // Deletion methods
-    void removeByName(const std::string& name); // Removes the contact with matching name
+    void removeByName(const std::string& name) // Removes the contact with matching name
+    {
+        if(head->getName() == name)
+        {
+            head = head->getNext();
+            return;
+        }
+        auto it = head;
+        while(it->getNext()->getName() != name)
+        {
+            it = it->getNext();
+        }
+        it->setNext(it->getNext()->getNext());
+    }
 
     // Search methods
-    ContactNode* searchByName(const std::string& name);    // Returns the node with matching name 
+    ContactNode* searchByName(const std::string& name)    // Returns the node with matching name
+    {
+    }
     ContactNode* searchByEmail(const std::string& email);  // Returns the node with matching email
     ContactNode* searchByPhone(const std::string& phone);  // Returns the node with matching phone
 
     // Print methods
-    void print();
+    void print()
+    {
+        auto it = head;
+        while(it != nullptr)
+        {
+            std::cout << "Name: " << it->getName() << ", Email: " << it->getEmail() << ", Phone: " << it->getPhone() << std::endl;
+            it = it->getNext();
+        }
+    }
 
     // Edit method
     void editContact(const std::string& name, const std::string& newEmail,
-                     const std::string& newPhone); // Edits the contact with matching name
+                     const std::string& newPhone) // Edits the contact with matching name
+    {
+
+    }
 };
 
 // main function to use all the methods
-int main();
+int main()
+{
+    ContactsList contactsList;
+    contactsList.addContact("mostafa", "@@", "0912");
+    contactsList.print();
+    contactsList.addContact("esmaeel", "@$", "0871");
+    contactsList.print();
+    contactsList.addContact("abol", "@$", "0871");
+    contactsList.print();
+    contactsList.removeByName("abol");
+    cout << "here" << endl;
+    contactsList.print();
+}

@@ -158,6 +158,15 @@ public:
     // Search methods
     ContactNode* searchByName(const std::string& name)    // Returns the node with matching name
     {
+        auto it = head;
+        while(it != nullptr)
+        {
+            if(it->getName() == name)
+            {
+                return it;
+            }
+            it = it->getNext();
+        }
     }
     ContactNode* searchByEmail(const std::string& email);  // Returns the node with matching email
     ContactNode* searchByPhone(const std::string& phone);  // Returns the node with matching phone
@@ -186,12 +195,9 @@ int main()
 {
     ContactsList contactsList;
     contactsList.addContact("mostafa", "@@", "0912");
-    contactsList.print();
     contactsList.addContact("esmaeel", "@$", "0871");
-    contactsList.print();
     contactsList.addContact("abol", "@$", "0871");
-    contactsList.print();
-    contactsList.removeByName("abol");
+    auto tmp = contactsList.searchByName("mostafa");
+    cout << tmp->getEmail() << endl;
     cout << "here" << endl;
-    contactsList.print();
 }

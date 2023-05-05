@@ -67,10 +67,10 @@ public:
     // Destructor
     ~ContactsList()
     {
-        auto current = head;
+        ContactNode *current = head;
         while(current != nullptr)
         {
-            auto temp = current;
+            ContactNode *temp = current;
             current = current->getNext();
             delete temp;
         }
@@ -85,7 +85,7 @@ public:
 
     ContactsList operator+(const ContactsList& other)  // Concatenation operator
     {
-        auto it = head;
+        ContactNode *it = head;
         while(it != nullptr)
         {
             it = it->getNext();
@@ -96,7 +96,7 @@ public:
 
     ContactsList operator-(const ContactsList other)    // Subtraction operator
     {
-        auto it = head;
+        ContactNode *it = head;
         while(it->getNext() != other.head)
         {
             it = it->getNext();
@@ -112,7 +112,7 @@ public:
 
     ContactNode& operator[](int index)                 // Subscript operator
     {
-        auto it = head;
+        ContactNode *it = head;
         int counter = 0;
         while(counter < index && it != nullptr)
         {
@@ -146,7 +146,7 @@ public:
             head = head->getNext();
             return;
         }
-        auto it = head;
+        ContactNode *it = head;
         while(it->getNext()->getName() != name)
         {
             it = it->getNext();
@@ -157,7 +157,7 @@ public:
     // Search methods
     ContactNode* searchByName(const std::string& name)    // Returns the node with matching name
     {
-        auto it = head;
+        ContactNode *it = head;
         while(it != nullptr)
         {
             if(it->getName() == name)
@@ -171,7 +171,7 @@ public:
 
     ContactNode* searchByEmail(const std::string& email)  // Returns the node with matching email
     {
-        auto it = head;
+        ContactNode *it = head;
         while(it != nullptr)
         {
             if(it->getEmail() == email)
@@ -185,7 +185,7 @@ public:
 
     ContactNode* searchByPhone(const std::string& phone)  // Returns the node with matching phone
     {
-        auto it = head;
+        ContactNode *it = head;
         while(it != nullptr)
         {
             if(it->getPhone() == phone)
@@ -200,7 +200,7 @@ public:
     // Print methods
     void print()
     {
-        auto it = head;
+        ContactNode *it = head;
         while(it != nullptr)
         {
             std::cout << "Name: " << it->getName() << ", Email: " << it->getEmail() << ", Phone: " << it->getPhone() << std::endl;
@@ -212,7 +212,7 @@ public:
     void editContact(const std::string& name, const std::string& newEmail,
                      const std::string& newPhone) // Edits the contact with matching name
     {
-        auto found = searchByName(name);
+        ContactNode *found = searchByName(name);
         if(found)
         {
             found->setEmail(newEmail);
@@ -229,9 +229,9 @@ int main()
     contactsList.addContact("esmaeel", "esmaeel@yahoo.com", "2");
     contactsList.addContact("abolfazl", "abol@gmail.com", "3");
     contactsList.editContact("mostafa", "newEmail", "4");
-    auto temp = contactsList.searchByName("mostafa");
+    ContactNode *temp = contactsList.searchByName("mostafa");
     cout << temp->getEmail() << endl;
-    auto index_test = contactsList[0];
+    ContactNode index_test = contactsList[0];
     cout << index_test.getName() << endl;
     index_test = contactsList[2];
     cout << index_test.getName() << endl;

@@ -213,7 +213,12 @@ public:
     void editContact(const std::string& name, const std::string& newEmail,
                      const std::string& newPhone) // Edits the contact with matching name
     {
-
+        auto found = searchByName(name);
+        if(found)
+        {
+            found->setEmail(newEmail);
+            found->setPhone(newPhone);
+        }
     }
 };
 
@@ -224,6 +229,7 @@ int main()
     contactsList.addContact("mostafa", "@@", "0912");
     contactsList.addContact("esmaeel", "@$", "0871");
     contactsList.addContact("abol", "@$", "0871");
-    auto tmp = contactsList.searchByEmail("@@");
-    cout << tmp->getName() << endl;
+    contactsList.editContact("mostafa", "newEmail", "777");
+    auto temp = contactsList.searchByName("mostafa");
+    cout << temp->getEmail() << endl;
 }

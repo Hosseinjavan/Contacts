@@ -74,7 +74,6 @@ public:
             current = current->getNext();
             delete temp;
         }
-        std::cout << "Contacts List removed!" << std::endl;
     }
 
     // Operators
@@ -226,10 +225,17 @@ public:
 int main()
 {
     ContactsList contactsList;
-    contactsList.addContact("mostafa", "@@", "0912");
-    contactsList.addContact("esmaeel", "@$", "0871");
-    contactsList.addContact("abol", "@$", "0871");
-    contactsList.editContact("mostafa", "newEmail", "777");
+    contactsList.addContact("mostafa", "mostafa@yahoo.com", "1");
+    contactsList.addContact("esmaeel", "esmaeel@yahoo.com", "2");
+    contactsList.addContact("abolfazl", "abol@gmail.com", "3");
+    contactsList.editContact("mostafa", "newEmail", "4");
     auto temp = contactsList.searchByName("mostafa");
     cout << temp->getEmail() << endl;
+    auto index_test = contactsList[0];
+    cout << index_test.getName() << endl;
+    index_test = contactsList[2];
+    cout << index_test.getName() << endl;
+    contactsList.print();
+    contactsList.removeByName("esmaeel");
+    contactsList.print();
 }

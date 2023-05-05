@@ -55,7 +55,10 @@ private:
 
 public:
     // Constructors
-    ContactsList();
+    ContactsList()
+    {
+        head = nullptr;
+    }
     ContactsList(const ContactsList& other);
 
     // Destructor

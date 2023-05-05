@@ -65,7 +65,17 @@ public:
     }
 
     // Destructor
-    ~ContactsList();
+    ~ContactsList()
+    {
+        auto current =head;
+        while(current != nullptr)
+        {
+            auto temp = current;
+            current = current->getNext();
+            delete temp;
+        }
+        std::cout << "Contacts List removed!" << std::endl;
+    }
 
     // Operators
     ContactsList& operator=(const ContactsList& other); // Replace operator

@@ -52,7 +52,6 @@ public:
 class ContactsList {
 private:
     ContactNode* head;
-
 public:
     // Constructors
     ContactsList()
@@ -67,7 +66,7 @@ public:
     // Destructor
     ~ContactsList()
     {
-        auto current =head;
+        auto current = head;
         while(current != nullptr)
         {
             auto temp = current;
@@ -78,11 +77,50 @@ public:
     }
 
     // Operators
-    ContactsList& operator=(const ContactsList& other); // Replace operator
-    ContactsList operator+(const ContactsList& other);  // Concatenation operator
-    ContactsList operator-(const ContactsList other);    // Subtraction operator
-    bool operator==(const ContactsList& other);         // Equality operator
-    ContactNode& operator[](int index);                 // Subscript operator
+    ContactsList& operator=(const ContactsList& other) // Replace operator
+    {
+        head = other.head;
+        return *this;
+    }
+
+    ContactsList operator+(const ContactsList& other)  // Concatenation operator
+    {
+        auto it = head;
+        while(it != nullptr)
+        {
+            it = it->getNext();
+        }
+        it->setNext(other.head);
+        return *this;
+    }
+
+    ContactsList operator-(const ContactsList other)    // Subtraction operator
+    {
+        auto it = head;
+        while(it->getNext() != other.head)
+        {
+            it = it->getNext();
+        }
+        it->setNext(nullptr);
+        return *this;
+    }
+
+    bool operator==(const ContactsList& other)         // Equality operator
+    {
+        return head == other.head;
+    }
+
+    ContactNode& operator[](int index)                 // Subscript operator
+    {
+        auto it = head;
+        int counter = 0;
+        while(counter < index && it != nullptr)
+        {
+            counter++;
+            it = it->getNext();
+        }
+        return *it;
+    }
 
     // Insertion method
     void addContact(const std::string& name, const std::string& email,

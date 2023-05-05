@@ -8,13 +8,45 @@ private:
     std::string phone;
     ContactNode* next;
 
-  public:
+public:
     ContactNode(const std::string& name, const std::string& email,
-             const std::string& phone);
-  // getters and setters
-  //...
-  
-  //...
+                const std::string& phone)
+                : name(name)
+                , email(email)
+                , phone(phone)
+                , next(next){}
+
+    const std::string &getName() const {
+        return name;
+    }
+
+    void setName(const std::string &name) {
+        ContactNode::name = name;
+    }
+
+    const std::string &getEmail() const {
+        return email;
+    }
+
+    void setEmail(const std::string &email) {
+        ContactNode::email = email;
+    }
+
+    const std::string &getPhone() const {
+        return phone;
+    }
+
+    void setPhone(const std::string &phone) {
+        ContactNode::phone = phone;
+    }
+
+    ContactNode *getNext() const {
+        return next;
+    }
+
+    void setNext(ContactNode *next) {
+        ContactNode::next = next;
+    }
 };
 
 class ContactsList {

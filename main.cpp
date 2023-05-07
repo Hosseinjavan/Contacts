@@ -14,8 +14,7 @@ public:
                 const std::string& phone)
                 : name(name)
                 , email(email)
-                , phone(phone)
-                , next(next){}
+                , phone(phone){}
 
     const std::string &getName() const {
         return name;
